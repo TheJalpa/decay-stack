@@ -59,7 +59,7 @@ Example:
 
 ./modsxml/mod123.xml
 ./modsxml/mod456.xml
-./modsxml/mld684.xml
+./modsxml/mod684.xml
 
 ./originalxml/types.xml
 
