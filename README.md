@@ -35,14 +35,23 @@ For more information: [You can click here for a guide](https://wiki.python.org/m
 
 This tool does exactly what it sounds like it does. It will piece together XML files for you.
 
-How to use it:
+This tool is used to stitch and add xml files for a first time only. Keep in mind, if you run this
+more than once, with the same xml files, you'll duplicate the entries. This is intended to help
+server owners add mods for first time use. So if you add mod1234.xml, and then run the script again,
+you'll be adding mod1234.xml to types.xml twice, which will cause duplication errors.
+
+At some point in the near future this script will have the ability to do more.
+I'll even add duplicate entry checks at some point. But.... one thing at a time.
+
+**How to use it:**
 
 - Place the xml files you will need to add to your types.xml in the "modsxml" folder.
   _(Special note, some mods have xml files for specific maps so be sure it's what you need. Make sure no duplicate filenames.)_
+- Make sure you've added notations in your XML files. For instance <!-- Name of my mod here so I know where it starts --> _These are not removed_
 - Place your types.xml for your map in the "originalxml" folder. This will be your xml from your map.
   _(Note, this can be found in basedirectory/mpmissions/missionname/db/types.xml)_
 
-\*\* What will this do?  
+**What will this do?**
 XML Stitcher is using basic regex to look for patterns in your XML files. It will iterate through all files
 within the modsxml folder. It will then clean them and append them to your types.xml file.
 
@@ -54,8 +63,8 @@ Example:
 
 ./originalxml/types.xml
 
-Script is executed. All 3 mod xml files above are cleaned. </types> is removed at the bottom of types.xml
-and is then appended with the mod xmls above. It is then appended with </types> and closed.
+Script is executed. All 3 mod xml files above are cleaned. /types is removed at the bottom of types.xml
+and is then appended with the mod xmls above. It is then appended with /types and closed.
 
 No further action should be needed, you can use this types.xml then on your server.  
 It is highly recommended you go ahead and backup the original types.xml on your server as types.backup

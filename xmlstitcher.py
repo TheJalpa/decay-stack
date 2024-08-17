@@ -7,6 +7,11 @@ if os.path.exists("types.xml"):
     os.remove("types.xml")
 os.system('touch types.xml')
 
+if os.path.exists("modsxml/README.md"):
+    os.remove("modsxml/README.md")
+if os.path.exists("originalxml/README.md"):
+    os.remove("originalxml/README.md")
+
 f = open('originalxml/types.xml', "r")
 copy = open("types.xml", "w")
 for line in f:
@@ -22,6 +27,7 @@ f.close()
 copy.close()
 
 listfiles = os.listdir('modsxml')
+print('Appending the following files: \n')
 print(listfiles)
 for xmls in listfiles:
     modlink = "modsxml/" + xmls
@@ -34,7 +40,6 @@ for xmls in listfiles:
             print('removing headliner')
         elif re.match(r'<types>', line):
             print('Found <types>, skipping')
-            print(line)
         elif re.match(r'</types>', line):
             print('removing trailing </types>, skipping')
         else:
