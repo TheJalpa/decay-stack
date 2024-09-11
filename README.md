@@ -129,8 +129,8 @@ WorkingDirectory=/gaming/dayzserver/
 LimitNOFILE=100000
 ExecReload=/bin/kill -s HUP $MAINPID
 ExecStop=/bin/kill -s INT $MAINPID
-User=steam
-Group=steam
+User=youruser
+Group=youruser
 Restart=on-failure
 RestartSec=5s
 StandardOutput=/var/log/dayz.log
@@ -139,3 +139,6 @@ StandardError=/var/log/dayzerror.log
 [Install]
 WantedBy=multi-user.target
 ```
+
+Note: It's most likely you are using "steam" as that's what is recommended, so "youruser" is just a placeholder
+but is usually going to be "steam" if you used the exact instructions in the bohemia tutorial.
