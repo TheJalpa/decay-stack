@@ -123,10 +123,9 @@ Wants=network-online.target
 After=syslog.target network.target nss-lookup.target network-online.target
 
 [Service]
-#ExecStartPre=/home/your_username/servers/dayz-server/update.sh
-ExecStart=/gamingshit/dayzscripts/startdayz.sh
+ExecStart=/gaming/dayzscripts/startdayz.sh
 -BEpath=battleeye
-WorkingDirectory=/gamingshit/dayzserver/
+WorkingDirectory=/gaming/dayzserver/
 LimitNOFILE=100000
 ExecReload=/bin/kill -s HUP $MAINPID
 ExecStop=/bin/kill -s INT $MAINPID
