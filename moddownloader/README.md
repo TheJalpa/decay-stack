@@ -29,9 +29,9 @@ This is so the script can copy items from the workshop to your server, and symbo
 
 Example:
 
-123456
+````123456
 456789
-482827
+482827```
 
 Save this file.
 
@@ -42,9 +42,9 @@ Save this file.
 
 Example:
 
-877666
+```877666
 786786
-989898
+989898```
 
 Save this file.
 
@@ -59,3 +59,4 @@ Save this file.
 
 If you find you need a very specific startup order, this script appends the mods in the order you put them in modlist.txt.
 So if you need to make sure the order stays the same every time, order them accordingly in modlist.txt.
+````
