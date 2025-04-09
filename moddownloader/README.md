@@ -63,7 +63,3 @@ Save this file.
 
 If you find you need a very specific startup order, this script appends the mods in the order you put them in modlist.txt.
 So if you need to make sure the order stays the same every time, order them accordingly in modlist.txt.
-
-```
-
-```
