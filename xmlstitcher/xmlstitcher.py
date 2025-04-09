@@ -3,6 +3,21 @@ import sys
 import re
 import shutil
 
+primemods = "./modsxml"
+primeoriginal = "./originalxml"
+
+if os.path.exists(primemods):
+    print('Mods folder exists, continuing.')
+else:
+    print('Mods directory does not exist.  Priming directories.  Please run the script again. Be sure to add your xml files to the correct folders.')
+    os.makedirs(primemods)
+    exit('No Existing Folders for prod run')
+if os.path.exists(primeoriginal):
+    print('Originals folder exists.  Continuing.')
+else:
+    print('Originals directory does not exist.  Priming directories.  Please run the script again.  Be sure to add your xml files to the correct folders.')
+    os.makedirs(primeoriginal)
+    exit('No Existing Folders for prod run')
 if os.path.exists("types.xml"):
     os.remove("types.xml")
 os.system('touch types.xml')

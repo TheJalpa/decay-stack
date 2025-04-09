@@ -94,6 +94,12 @@ This alleviates some of that frustration so you can just cut and paste what you 
 
 In the future I will add a feature to search up specific patterns, but right now it just dumps your entire types.xml
 
+Another neat new addition to this is that it will diff your types file against the traderconfig file. If you forgot a type in your config,
+you will get an output.txt or sorted.txt file which contains all listed types missing in your trader.
+
+This helps you see not only what the list of types in your types.xml file is, but if you missed some while adding to traderconfig.txt.
+I hope this helps! Thanks to [tknorris23](https://github.com/tknorris23) for the help with the sorting on the script so we could diff that.
+
 ## Mod downloader
 
 **What will this do?**
@@ -142,3 +148,16 @@ WantedBy=multi-user.target
 
 Note: It's most likely you are using "steam" as that's what is recommended, so "youruser" is just a placeholder
 but is usually going to be "steam" if you used the exact instructions in the bohemia tutorial.
+
+## dev2prodsync
+
+This script is going to help you with a standard workflow. In the case where you want to test your changes, but don't want to deal
+with having to meticulously double check your files, the idea here is to be able to make your changes from a central location.
+
+Example: I have a git repo that contains my mod settings, and map settings in a "map" and "profiles" folder in my git project.
+I make my changes, I run the script according to the readme instructions and this allows me to push my changes to dev.
+
+Once I am happy with those changes, I promote them to production with the suggested workflow.
+This may sound complicated, but once configured you can make all your changes in vscode, execute your script, and restart your server and test changes.
+Then push those changes up, do the same on your prod server and off you go, simplifying it instead of having to do big file transfers and worrying
+if you forgot something.

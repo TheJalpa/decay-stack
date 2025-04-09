@@ -37,7 +37,8 @@ Save this file.
 
 3.  Populate the manualmods.txt with a list of all mods you want installed and use on your server.
     However these are mods that you have to manually add to your server via ftp or other means,
-    likely due to steamcmd timeouts or another reason.
+    likely due to steamcmd timeouts or another reason. Example: You need a mod that's 5 gigs and steamcmd times out when dling it.
+    So you just manually install it instead, but the script needs to know about it to prime your start script.
 
 Example:
 
