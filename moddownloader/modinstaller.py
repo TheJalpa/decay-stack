@@ -8,7 +8,7 @@ lines = f.read().splitlines()
 for line in lines:
     #print(line)
     try:
-        os.system('ln -s steamapps/workshop/content/221100/' + line + '/' + homedir + '/' + line)
+        os.system('ln -s steamapps/workshop/content/221100/' + line + '/ ' + homedir + '/' + line)
     except:
         print('ln -s failed, likely due to already existing')
     try:
