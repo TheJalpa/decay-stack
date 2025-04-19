@@ -4,11 +4,13 @@
 fill out dzvars.py
 This contains the directories for:
 
-- clonedir: This is your cloned git repo or working directory. This would be if you are working from git for your dayz server. Otherwise if you have a central location, it would be that. This assumes your location has 2 folders. map and profiles. Within these are the contents for your workflow. This would be mod settings, map settings, etc.
+- clonedir: This is your cloned git repo or working directory on your local machine. This would be if you are working from git for your dayz server. Otherwise if you have a central location, it would be that. This assumes your location has 2 folders. map and profiles. Within these are the contents for your workflow. This would be mod settings, map settings, etc.
+- devserverdir: This is the location of the base server on your prod machine.  For instance /myfolder/dayzserver/
 - devprofiledir: This will be the location of your profile directory for your dev server. Example, if you are running a local dayzserver this might be /mnt/c/steamcmd/steamapps/common/DayZServer/profiles/
 - devmaploc: This will be the location of your map directory for your dev server. Example, if running a local server this might be /mnt/c/steamcmd/steamapps/common/DayZServer/mpmissions/empty.deerisle/
 - prodprofiledir: This script would be placed on your prod server where you'll be cloning your workload and then this becomes the working profile directory for that. Example /home/steam/steamcmd/steamapps/common/DayZServer/profiles/
 - prodmaploc: Same as above, this is the working prod location of your production server. Example: /home/steam/steamcmd/steamapps/common/DayZServer/mpmissions/empty.deerisle/
+- clonedirprod: The location of the cloned github repo on your production machine.  For instance /home/steam/mygitrepo/
 
 #Step 2
 Run the script

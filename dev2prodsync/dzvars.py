@@ -1,5 +1,7 @@
 clonedir = ""
+devserverdir = ""
 devprofiledir = ""
 devmaploc = ""
 prodprofiledir = ""
 prodmaploc = ""
+clonedirprod = ""

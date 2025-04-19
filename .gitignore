@@ -3,3 +3,5 @@
 dayzmods.sh
 startdayz.sh
 typescraper/*.txt
+dev2prodsync/__pycache__
+*/__pycache__
