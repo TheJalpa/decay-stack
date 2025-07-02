@@ -18,14 +18,34 @@ You can do this however you'd like, but this has worked well for me.
 
 Instructions:
 
-1.  Populate dayzvars.py - this is imported into the following scripts. It is worth noting that
+1.  Populate branchname.py - this is imported into the following scripts. It is worth noting that
     in order to even download mods for dayzservers on steamcmd you need steam credentials. You also
     need to tell the script where your dayzserver lives, and where your steam lives.
+
+    Each of these will be for each map you configure.  So for instance if you're running deerisle,
+    make a deerisle.py with the vars for homedir, steamcmdhomedir, steamlogin, steampass.
+
+    Likewise if you're running a map like melkor, make a melkor.py with those vars filled out.
+
+    This will require you to also have folders setup where this script is deployed in your base directory.
+    The file structure should look like
+    ./
+    ./scripts
+    ./map1
+    ./map1/profile
+    ./map1/map
+    ./map2
+    ./map2/profile
+    ./map2/map
+
+    For purposes of examples a "deerisle.py" has been created in here.
 
 This is so the script can copy items from the workshop to your server, and symbolically link them.
 
 2.  Populate modlist.txt with a list of all mods you want installed and will use on your server.
     This should be mods you can download from steamcmd. Each should be a new line.
+    This will live within your ./mapxyz/ folder.  You should have this in each map you have for the mods you want
+    to run for that map.
 
 Example:
 
@@ -52,12 +72,33 @@ Example:
 
 Save this file.
 
-4.  Execute the script for moddownload. `python3 moddownloader.py` - a new script will be generated.
-    This will be called dayzmods.sh. You can then execute this file `bash dayzmods.sh` and it will download
+4.  Execute the script for moddownload. `python3 moddownloader.py --branch mapname` - a new script will be generated.
+    This will be called dayzmods.sh. You can then execute this file `bash dayzmodsmapname.sh` and it will download
     all necessary mods for your server.
 
-5.  Execute the script for modinstaller. `python3 modinstaller.py` - From here you can check your startdayz.sh script
+5.  Execute the script for modinstaller. `python3 modinstaller.py --branch mapname` - From here you can check your startdayz.sh script
     and make sure it has updated for your server. You should see all your variables for your startup script, the list of mods in order.
+
+### Updatecheck.py
+
+This is to be ran on a cronjob every x hours.  This will only check each mod once every 4 seconds (to avoid spamming steam).  Right now this only works for linux, I'll work on a windows version.
+
+This will essentially do the following:
+
+Usage
+
+```
+*/6 * * * * python3 /path/to/updatecheck.py --branch branchname>> /path/to/modlog.txt 2>&1
+```
+
+This runs the script against the branch, branchname being the environment you want (example, deerisle)
+This then checks the modlist that is separately in your environment, creates a csv (if it doesn't exist) and adds new mods (if adding a new one).
+
+If the last updated time of the mod matches the CSV, no action is taken.  If it does not match, the update script will be ran and then a sudo systemctl restart servicename takes place
+
+This will update the mods, and restart the server.
+
+You can change this to however long you see fit in both the cronjob and the time.  However, right now with it being 4 seconds, that should avoid any spamming steam that would get you API blocked.  If you really want to play with that go for it but I assume zero responsibility if you get yourself blocked.  I'm running mine every 6 hours, so 4 seconds feels perfectly fine as a sleep time.
 
 ### Special note
 

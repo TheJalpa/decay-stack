@@ -7,12 +7,12 @@ import shutil
 parser = argparse.ArgumentParser()
 parser.add_argument("--dzbranch", required=True, type=str)
 parser.add_argument("--dzrun", required=True, type=str)
+parser.add_argument("--dzmap", required=True, type=str)
 args = parser.parse_args()
 dzbranch = args.dzbranch
 dzrun = args.dzrun
+dzmap = args.dzmap
 def devkeys():
-    #The purpose of this function is to copy the keys over from your windows server mods
-    #And automatically put them in the keys folder
     # Define the base directory (where this script is run)
     base_dir = devserverdir
 
@@ -49,6 +49,12 @@ def devkeys():
                     break  # Stop after finding the first valid key folder
 
     print("Done.")
+#Vars used:
+#clonedir = ""
+#devprofiledir = ""
+#devmaploc = ""
+#prodprofiledir = ""
+#prodmaploc = ""
 
 def run_rsync(source, destination, options=None):
     command = ['rsync']
@@ -81,22 +87,29 @@ if dzrun == "true":
 if dzrun == "false":
     rsync_options = ['-av']
     if dzbranch == "dev":   
-        os.system('ls ' + clonedir) 
-        os.system('ls ' + devprofiledir)
-        run_rsync(clonedir + "profiles/", devprofiledir, rsync_options)
-        run_rsync(clonedir + "map/", devmaploc, rsync_options)
-        devkeys()
-        exit('Successfuly finished')
+        if os.path.exists(dzmap):
+            clonedir = clonedir + '/' + dzmap + '/'
+            os.system('ls ' + clonedir) 
+            os.system('ls ' + devprofiledir)
+            run_rsync(clonedir + "profiles/", devprofiledir, rsync_options)
+            run_rsync(clonedir + "map/", devmaploc, rsync_options)
+            devkeys()
+            exit('Successfuly finished')
+        else:
+            print('Exiting as you entered an invalid map config')
+            exit(1)
     if dzbranch == "prod":
-        #You can remove the LBmaster lines if you are not using LB Banking.  
-        #This is only relevant in cases where you need to make it immutable since that's the only
-        #Current workaround for linux machines using it, or it screws up the json formatting.
-        os.system('sudo chattr -i ' + prodprofiledir + "LBmaster/Config/LBBanking/ATMConfig.json")
-        os.system('sudo chattr -i ' + prodprofiledir + "LBmaster/Config/LBBanking/ATMPositions.json")
-        run_rsync(clonedirprod + "profiles/", prodprofiledir, rsync_options)
-        run_rsync(clonedirprod + "map/", prodmaploc, rsync_options)
-        os.system('sudo chattr +i ' + prodprofiledir + "LBmaster/Config/LBBanking/ATMConfig.json")
-        os.system('sudo chattr +i ' + prodprofiledir + "LBmaster/Config/LBBanking/ATMPositions.json")
-        exit('Successfuly finished')
+        if os.path.exists(dzmap):
+            clonedir = clonedir + '/' + dzmap + '/'
+            os.system('sudo chattr -i ' + prodprofiledir + "LBmaster/Config/LBBanking/ATMConfig.json")
+            os.system('sudo chattr -i ' + prodprofiledir + "LBmaster/Config/LBBanking/ATMPositions.json")
+            run_rsync(clonedirprod + "profiles/", prodprofiledir, rsync_options)
+            run_rsync(clonedirprod + "map/", prodmaploc, rsync_options)
+            os.system('sudo chattr +i ' + prodprofiledir + "LBmaster/Config/LBBanking/ATMConfig.json")
+            os.system('sudo chattr +i ' + prodprofiledir + "LBmaster/Config/LBBanking/ATMPositions.json")
+            exit('Successfuly finished')
+        else:
+            print('Exiting as you entered an invalid map config')
+            exit(1)
     else:
         print("No correct branch specified.")
