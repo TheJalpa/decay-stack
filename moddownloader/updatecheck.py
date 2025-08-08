@@ -20,7 +20,7 @@ else:
 # Map branches to module names
 branch_modules = {
     "deerisle": "deerisle",
-    "melkar": "melkar",
+    "melkart": "melkart",
 }
 if branch in branch_modules:
     vars = importlib.import_module(branch_modules[branch])
@@ -28,9 +28,12 @@ if branch in branch_modules:
 else:
     print(f"Error: Unknown branch '{branch}'")
     sys.exit(1)
-#f = open(vars.clonedir + '/' + branch_modules[branch] + '/modlist.txt', "r")
+
+#Using the argv and importlib here from previous script.
+#This just maps out the location of your modlist for the branch and csv for that branch.
 MOD_ID_FILE = vars.clonedir + '/' + branch_modules[branch] + '/modlist.txt'
 MOD_UPDATE_FILE = vars.clonedir + '/' + branch_modules[branch] + "/mod_updates.csv"
+
 def get_workshop_mod_update_time(mod_id):
     url = f"https://steamcommunity.com/sharedfiles/filedetails/?id={mod_id}"
     headers = {
@@ -80,10 +83,12 @@ def main():
     for mod_id in mod_ids:
         current_time = get_workshop_mod_update_time(mod_id)
         if not current_time:
-            continue  # Skip on error
+            continue
 
         stored_time = stored_updates.get(mod_id)
 
+        #Keep in mind that if you update stuff in the modlist this will have to run another cycle.
+        #I'll eventually make a retry if this catches but right now I just want it to check updates.
         if stored_time is None:
             print(f"[{mod_id}] New mod detected! Added to tracking.")
             stored_updates[mod_id] = current_time
